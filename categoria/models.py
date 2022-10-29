@@ -4,6 +4,7 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.db.models.fields import CharField, TextField, SlugField
 from django.db.models.fields.files import ImageField
+from django.urls import reverse
 
 # Create your models here.
 class Categoria(models.Model):
@@ -15,6 +16,10 @@ class Categoria(models.Model):
     class Meta:
         verbose_name = "categoria"
         verbose_name_plural = 'categorias'
+
+    def get_url(self):
+        return reverse('store:producto_por_categoria', args=[self.slug])
+
 
     def __str__(self):
         return self.categoria_nombre
